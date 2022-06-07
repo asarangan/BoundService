@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private var myService: MyService? = null
     //var bound: Boolean = false
 
-    private val serviceConnection = object : ServiceConnection {
+    private val serviceConnection:ServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
 //            val myServiceBinder: MyService.MyServiceBinder =
 //                p1 as MyService.MyServiceBinder
