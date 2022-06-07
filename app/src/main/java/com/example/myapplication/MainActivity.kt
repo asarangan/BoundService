@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
+val TAG:String = "ExampleService"
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,12 +24,12 @@ class MainActivity : AppCompatActivity() {
             val myServiceBinder: MyService.MyServiceBinder =
                 p1 as MyService.MyServiceBinder
            myService = myServiceBinder.getService()
-            Log.d("Service","onService Connected")
+            Log.d(TAG,"onService Connected")
             //bound = true
         }
 
         override fun onServiceDisconnected(p0: ComponentName?) {
-            Log.d("Service","Service Disconnection")
+            Log.d(TAG,"onService Disconnected")
             //bound = false
         }
     }
@@ -54,11 +55,11 @@ class MainActivity : AppCompatActivity() {
             if (!isMyServiceRunning(MyService::class.java)){
 //                Intent(this, MyService::class.java).also {intent ->
 //                bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)}
-                Log.d("Service","Service was not running. Establishing bind.")
+                Log.d(TAG,"Service was not running. Establishing bind.")
                 bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
             }
             else{
-                Log.d("Service","Service was already running. Establishing bind.")
+                Log.d(TAG,"Service was already running. Establishing bind.")
                 bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
             }
         }
@@ -67,11 +68,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonStopBound).setOnClickListener {
             if (isMyServiceRunning(MyService::class.java)){
                     unbindService(serviceConnection)
-                    Log.d("Service", "Service was running. Unbinding.")
+                    Log.d(TAG, "Service was running. Unbinding.")
                     //bound = false
             }
             else{
-                Log.d("Service","Service was not running. Cannot unbind.")
+                Log.d(TAG,"Service was not running. Cannot unbind.")
             }
         }
 
@@ -80,10 +81,10 @@ class MainActivity : AppCompatActivity() {
             if (!isMyServiceRunning(MyService::class.java)){
                 intent = Intent(this, MyService::class.java)
                 startService(intent)
-                Log.d("Service","Service was not running. Starting service.")
+                Log.d(TAG,"Service was not running. Starting service.")
             }
             else{
-                Log.d("Service","Service was already running. No need to start again.")
+                Log.d(TAG,"Service was already running. No need to start again.")
             }
         }
 
@@ -91,10 +92,10 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonStopService).setOnClickListener {
             if (isMyServiceRunning(MyService::class.java)){
                 stopService(intent)
-                Log.d("Service","Service was running. Stopping service.")
+                Log.d(TAG,"Service was running. Stopping service.")
             }
             else{
-                Log.d("Service","Service was not running. Nothing to stop.")
+                Log.d(TAG,"Service was not running. Nothing to stop.")
             }
         }
     }

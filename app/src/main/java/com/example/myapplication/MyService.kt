@@ -16,38 +16,38 @@ class MyService : Service() {
 
 
     override fun onBind(intent: Intent): IBinder {
-        Log.d("Service","onBind")
+        Log.d(TAG,"onBind")
         return binder
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
-        Log.d("Service","onUnbind")
+        Log.d(TAG,"onUnbind")
         return super.onUnbind(intent)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d("Service","onStartCommand")
+        Log.d(TAG,"onStartCommand")
         return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onRebind(intent: Intent?) {
-        Log.d("Service","onRebind")
+        Log.d(TAG,"onRebind")
         super.onRebind(intent)
     }
 
     override fun onCreate() {
-        Log.d("Service","onCreate")
+        Log.d(TAG,"onCreate")
         super.onCreate()
     }
 
     override fun onDestroy() {
-        Log.d("Service","onDestroy")
+        Log.d(TAG,"onDestroy")
         super.onDestroy()
     }
 
     private val mGenerator = Random()
     fun getNumber(): Int {
-        Log.d("Service","getNumber")
+        Log.d(TAG,"getNumber")
         return mGenerator.nextInt(100)
     }
 }
