@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //Bind
         findViewById<Button>(R.id.buttonStartBound).setOnClickListener {
             if (!isMyServiceRunning(MyService::class.java)){
 //                Intent(this, MyService::class.java).also {intent ->
@@ -62,17 +63,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //Unbind
         findViewById<Button>(R.id.buttonStopBound).setOnClickListener {
             if (isMyServiceRunning(MyService::class.java)){
-                unbindService(serviceConnection)
-                Log.d("Service","Service was running. Unbinding.")
-                //bound = false
+                    unbindService(serviceConnection)
+                    Log.d("Service", "Service was running. Unbinding.")
+                    //bound = false
             }
             else{
                 Log.d("Service","Service was not running. Cannot unbind.")
             }
         }
 
+        //Start Service
         findViewById<Button>(R.id.buttonStartService).setOnClickListener {
             if (!isMyServiceRunning(MyService::class.java)){
                 intent = Intent(this, MyService::class.java)
@@ -84,6 +87,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //Stop Service
         findViewById<Button>(R.id.buttonStopService).setOnClickListener {
             if (isMyServiceRunning(MyService::class.java)){
                 stopService(intent)
