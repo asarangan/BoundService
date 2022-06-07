@@ -12,7 +12,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-val TAG:String = "ExampleService"
+val TAG:String = "TestingService"
 
 class MainActivity : AppCompatActivity() {
 
