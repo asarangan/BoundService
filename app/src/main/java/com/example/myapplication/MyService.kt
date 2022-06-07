@@ -9,10 +9,11 @@ import java.util.*
 
 class MyService : Service() {
 
-    private val binder: Binder = MyServiceBinder()
     inner class MyServiceBinder : Binder() {
         fun getService(): MyService = this@MyService
     }
+    private val binder: Binder = MyServiceBinder()
+
 
     override fun onBind(intent: Intent): IBinder {
         Log.d("Service","onBind")

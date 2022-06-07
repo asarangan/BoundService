@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,18 +15,20 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var odometer: MyService
+    private lateinit var myService: MyService
     //var bound: Boolean = false
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
             val myServiceBinder: MyService.MyServiceBinder =
                 p1 as MyService.MyServiceBinder
-            odometer = myServiceBinder.getService()
+            myService = myServiceBinder.getService()
+            Log.d("Service","Service Connection")
             //bound = true
         }
 
         override fun onServiceDisconnected(p0: ComponentName?) {
+            Log.d("Service","Service Disconnection")
             //bound = false
         }
     }
@@ -39,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.buttonGet).setOnClickListener {
             if (isMyServiceRunning(MyService::class.java)) {
-                val num = odometer.getNumber()
+                val num = myService.getNumber()
                 tv.text = "Running: $num"
             } else {
                 tv.text = "Not Running"
