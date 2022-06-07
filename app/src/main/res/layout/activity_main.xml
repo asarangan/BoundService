@@ -16,39 +16,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGet" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartService" />
 
     <Button
-        android:id="@+id/buttonStart"
+        android:id="@+id/buttonStartBound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Service"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonGet"
+        android:text="Bind"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStartService"
+        app:layout_constraintEnd_toStartOf="@+id/buttonStopBound"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonGet" />
 
     <Button
         android:id="@+id/buttonGet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Value"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toStartOf="@+id/buttonStop"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStartBound"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonStart"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonStop"
+        android:id="@+id/buttonStopBound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unbind"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStopService"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonStartBound"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGet" />
+
+    <Button
+        android:id="@+id/buttonStartService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Service"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/buttonStartBound"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartBound" />
+
+    <Button
+        android:id="@+id/buttonStopService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Stop Service"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonGet"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/buttonStopBound"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStopBound" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

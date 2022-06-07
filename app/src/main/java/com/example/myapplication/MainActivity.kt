@@ -14,19 +14,19 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var odometer: OdometerService
-    var bound: Boolean = false
+    private lateinit var odometer: MyService
+    //var bound: Boolean = false
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
-            val odometerBinder: OdometerService.OdometerBinder =
-                p1 as OdometerService.OdometerBinder
-            odometer = odometerBinder.getOdometer()
-            bound = true
+            val myServiceBinder: MyService.MyServiceBinder =
+                p1 as MyService.MyServiceBinder
+            odometer = myServiceBinder.getService()
+            //bound = true
         }
 
         override fun onServiceDisconnected(p0: ComponentName?) {
-            bound = false
+            //bound = false
         }
     }
 
@@ -34,33 +34,43 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val buttonGet: Button = findViewById(R.id.buttonGet)
-        val buttonStart: Button = findViewById(R.id.buttonStart)
-        val buttonStop: Button = findViewById(R.id.buttonStop)
         val tv: TextView = findViewById(R.id.textView)
+        intent = Intent(this, MyService::class.java)
 
-        buttonGet.setOnClickListener {
-            if (isMyServiceRunning(OdometerService::class.java)) {
-                val num = odometer.getDistance()
+        findViewById<Button>(R.id.buttonGet).setOnClickListener {
+            if (isMyServiceRunning(MyService::class.java)) {
+                val num = odometer.getNumber()
                 tv.text = "Running: $num"
             } else {
                 tv.text = "Not Running"
             }
         }
 
-        buttonStop.setOnClickListener {
-            if (isMyServiceRunning(OdometerService::class.java)){
+        findViewById<Button>(R.id.buttonStopBound).setOnClickListener {
+            if (isMyServiceRunning(MyService::class.java)){
                 unbindService(serviceConnection)
                 //bound = false
             }
         }
 
-        buttonStart.setOnClickListener {
-            if (!isMyServiceRunning(OdometerService::class.java)){
-                Intent(this, OdometerService::class.java).also { intent ->
-                    bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
-                }
+        findViewById<Button>(R.id.buttonStartBound).setOnClickListener {
+            if (!isMyServiceRunning(MyService::class.java)){
+//                Intent(this, MyService::class.java).also {intent ->
+//                bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)}
+                bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
+            }
+        }
+
+        findViewById<Button>(R.id.buttonStartService).setOnClickListener {
+            if (!isMyServiceRunning(MyService::class.java)){
+                intent = Intent(this, MyService::class.java)
+                startService(intent)
+            }
+        }
+
+        findViewById<Button>(R.id.buttonStopService).setOnClickListener {
+            if (isMyServiceRunning(MyService::class.java)){
+                stopService(intent)
             }
         }
     }
