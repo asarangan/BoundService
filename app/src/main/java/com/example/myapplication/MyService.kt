@@ -12,12 +12,11 @@ class MyService : Service() {
     inner class MyServiceBinder : Binder() {
         fun getService(): MyService = this@MyService
     }
-    private val binder: Binder = MyServiceBinder()
-
 
     override fun onBind(intent: Intent): IBinder {
         Log.d(TAG,"onBind")
-        return binder
+        val myServicebinder: MyServiceBinder = MyServiceBinder()
+        return myServicebinder
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
