@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
-            val myServiceBinder: MyService.MyServiceBinder =
-                p1 as MyService.MyServiceBinder
-           myService = myServiceBinder.getService()
+//            val myServiceBinder: MyService.MyServiceBinder =
+//                p1 as MyService.MyServiceBinder
+           myService = (p1 as MyService.MyServiceBinder).getService()
             Log.d(TAG,"onService Connected")
             //bound = true
         }
