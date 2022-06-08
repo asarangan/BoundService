@@ -17,15 +17,11 @@ val TAG:String = "TestingService"
 class MainActivity : AppCompatActivity() {
 
     private var myService: MyService? = null
-    //var bound: Boolean = false
 
     private val serviceConnection:ServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
-//            val myServiceBinder: MyService.MyServiceBinder =
-//                p1 as MyService.MyServiceBinder
            myService = (p1 as MyService.MyServiceBinder).getService()
             Log.d(TAG,"onService Connected")
-            //bound = true
         }
 
         override fun onServiceDisconnected(p0: ComponentName?) {
