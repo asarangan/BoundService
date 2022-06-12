@@ -13,8 +13,11 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 
 val TAG:String = "TestingService"
+val CHANNEL_ID = "ChannelID"
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,7 +44,10 @@ class MainActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.O){
             Log.d(TAG,"Build verison is greater than O")
+            //If build version is greater than O, then we need a notification when service is running. Otherwise it will get killed
         }
+
+
         findViewById<Button>(R.id.buttonGet).setOnClickListener {
             if (isMyServiceRunning(MyService::class.java)) {
                 val num = myService?.getNumber()

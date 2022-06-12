@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
+import androidx.core.app.NotificationCompat
 import java.util.*
 
 class MyService : Service() {
@@ -28,6 +29,8 @@ class MyService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(TAG,"Service: onStartCommand")
+        val myNotification = MyNotification()
+        myNotification.showNotification(this)
         Thread{loop()}.start()
         //return super.onStartCommand(intent, flags, startId)
         return START_STICKY
