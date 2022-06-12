@@ -2,7 +2,10 @@ package com.example.myapplication
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.service.notification.NotificationListenerService
@@ -13,7 +16,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.createBitmap
 
-class MyNotification() {
+class MyNotification(context:Context) {
 
 
 
@@ -21,12 +24,18 @@ class MyNotification() {
         val CHANNEL_ID = "myChannelID"
 
         val notificationManager = NotificationManagerCompat.from(context)
+        val intent:Intent = Intent(context,MainActivity::class.java)
+        val pendingIntent = TaskStackBuilder.create(context).run{
+            addNextIntentWithParentStack(intent)
+            getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT)
+        }
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle("MyService")
             .setContentText("Service is Running")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setSmallIcon(R.drawable.ic_service_foreground)
+            .setContentIntent(pendingIntent)
             .build()
 
         val CHANNEL_NAME = "myChannelName"

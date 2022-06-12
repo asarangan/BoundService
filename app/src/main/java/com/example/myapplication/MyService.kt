@@ -29,7 +29,7 @@ class MyService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(TAG,"Service: onStartCommand")
-        val myNotification = MyNotification()
+        val myNotification = MyNotification(this)
         myNotification.showNotification(this)
         Thread{loop()}.start()
         //return super.onStartCommand(intent, flags, startId)

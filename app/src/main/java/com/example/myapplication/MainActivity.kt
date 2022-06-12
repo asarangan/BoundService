@@ -87,7 +87,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonStartService).setOnClickListener {
             if (!isMyServiceRunning(MyService::class.java)){
                 intent = Intent(this, MyService::class.java)
-                startService(intent)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(intent)
+                }
                 Log.d(TAG,"Service was not running. Starting service.")
             }
             else{
