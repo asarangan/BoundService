@@ -1,9 +1,6 @@
 package com.example.myapplication
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.TaskStackBuilder
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -20,7 +17,7 @@ class MyNotification(context:Context) {
 
 
 
-    fun showNotification(context: Context){
+    fun showNotification(context: Context):Notification{
         val CHANNEL_ID = "myChannelID"
 
         val notificationManager = NotificationManagerCompat.from(context)
@@ -53,6 +50,8 @@ class MyNotification(context:Context) {
 
         Log.d(TAG, "Show Notification")
         notificationManager.notify(0, notification)
+
+        return notification
     }
 
 }

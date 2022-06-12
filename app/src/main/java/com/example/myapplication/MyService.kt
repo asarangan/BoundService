@@ -30,7 +30,8 @@ class MyService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(TAG,"Service: onStartCommand")
         val myNotification = MyNotification(this)
-        myNotification.showNotification(this)
+        val notification = myNotification.showNotification(this)
+        startForeground(1,notification)
         Thread{loop()}.start()
         //return super.onStartCommand(intent, flags, startId)
         return START_STICKY
