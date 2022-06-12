@@ -1,10 +1,12 @@
 package com.example.myapplication
 
+import android.annotation.TargetApi
 import android.app.ActivityManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
@@ -37,6 +39,9 @@ class MainActivity : AppCompatActivity() {
         val tv: TextView = findViewById(R.id.textView)
         intent = Intent(this, MyService::class.java)
 
+        if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.O){
+            Log.d(TAG,"Build verison is greater than O")
+        }
         findViewById<Button>(R.id.buttonGet).setOnClickListener {
             if (isMyServiceRunning(MyService::class.java)) {
                 val num = myService?.getNumber()
